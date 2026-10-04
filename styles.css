@@ -1,0 +1,544 @@
+/* 
+ * Styles.css - Fun Noir / Comic Book Detective Theme
+ * Thick borders, sharp shadows, retro typewriter fonts, and vibrant accents!
+ */
+
+:root {
+    --bg-main: #1e1e24; /* Very dark slate */
+    --bg-card: #2b2b36; /* Slightly lighter slate */
+    --bg-paper: #fdf6e3; /* Manila folder / old paper color */
+    
+    --border-dark: #000000;
+    --border-light: #4a4a59;
+    
+    --text-main: #e0e0e0;
+    --text-dark: #1a1a1a;
+    --text-muted: #a0a0b0;
+    
+    /* Vibrant Neon Noir Accents */
+    --accent-yellow: #ffda79;
+    --accent-red: #ff5252;
+    --accent-cyan: #34ace0;
+    --accent-green: #33d9b2;
+    --accent-purple: #706fd3;
+    
+    /* Fun Comic Shadows */
+    --shadow-hard: 6px 6px 0px #000000;
+    --shadow-hard-hover: 2px 2px 0px #000000;
+    
+    --font-heading: 'Special Elite', cursive, monospace; /* Typewriter feel */
+    --font-ui: 'Space Grotesk', sans-serif; /* Quirky but readable */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-ui);
+    background-color: var(--bg-main);
+    background-image: 
+        radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+    background-size: 32px 32px;
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Navbar - Police Tape Vibe */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: var(--accent-yellow);
+    color: var(--text-dark);
+    border-bottom: 4px solid var(--border-dark);
+    box-shadow: 0 4px 0 rgba(0,0,0,0.3);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.brand-logo {
+    font-size: 2.2rem;
+    filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.5));
+}
+
+.brand-title {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.brand-text small {
+    font-family: var(--font-ui);
+    font-weight: 600;
+    color: rgba(0,0,0,0.7);
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Fun Chunky Buttons & Inputs */
+.select-input, .btn {
+    font-family: var(--font-ui);
+    background: var(--bg-card);
+    color: var(--text-main);
+    border: 3px solid var(--border-dark);
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    box-shadow: 4px 4px 0px var(--border-dark);
+    border-radius: 0; /* Sharp edges */
+}
+
+.select-input {
+    background: var(--bg-paper);
+    color: var(--text-dark);
+}
+
+.btn {
+    background: var(--bg-card);
+    text-transform: uppercase;
+}
+
+.btn:hover:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px var(--border-dark);
+}
+
+.btn:active:not(:disabled) {
+    transform: translate(4px, 4px);
+    box-shadow: 0px 0px 0px var(--border-dark);
+}
+
+.btn-primary {
+    background: var(--accent-red);
+    color: white;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: var(--bg-main);
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.5);
+}
+
+/* Layout Container */
+.app-container {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 2rem;
+    padding: 2rem;
+    flex: 1;
+    max-width: 1600px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .app-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Sidebar / Case Details - Looks like a Case File */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.panel-card {
+    background: var(--bg-card);
+    border: 3px solid var(--border-dark);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-hard);
+    position: relative;
+}
+
+/* Top pin/clip effect on panel cards */
+.panel-card::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 15px;
+    background: var(--accent-cyan);
+    border: 2px solid var(--border-dark);
+    box-shadow: 2px 2px 0px var(--border-dark);
+}
+
+.panel-title {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent-yellow);
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px dashed var(--border-light);
+    padding-bottom: 0.5rem;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    font-family: var(--font-ui);
+    background: var(--accent-purple);
+    color: white;
+    border: 2px solid var(--border-dark);
+    box-shadow: 2px 2px 0 var(--border-dark);
+    transform: rotate(2deg); /* playful tilt */
+}
+
+.story-text {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-main);
+    background: rgba(0,0,0,0.2);
+    padding: 1rem;
+    border-left: 4px solid var(--accent-cyan);
+}
+
+/* Suspects - Mugshot style */
+.suspects-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.suspect-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem;
+    background: var(--bg-paper);
+    color: var(--text-dark);
+    border: 3px solid var(--border-dark);
+    box-shadow: 3px 3px 0 var(--border-dark);
+    transform: rotate(-1deg);
+    transition: transform 0.2s;
+}
+
+.suspect-card:hover {
+    transform: rotate(0deg) scale(1.02);
+}
+
+.suspect-avatar {
+    font-size: 2rem;
+    background: #ccc;
+    padding: 0.5rem;
+    border: 2px solid var(--border-dark);
+}
+
+.suspect-name {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: block;
+}
+
+.suspect-role {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #555;
+    text-transform: uppercase;
+}
+
+/* Variables Dictionary - Evidence Tags */
+.variables-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.variable-tag {
+    font-size: 0.95rem;
+    padding: 0.6rem 0.8rem;
+    background: var(--accent-cyan);
+    color: var(--border-dark);
+    font-weight: 600;
+    border: 2px solid var(--border-dark);
+    box-shadow: 2px 2px 0 var(--border-dark);
+    position: relative;
+}
+
+/* Main Workspace */
+.workspace {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Feedback Alert - Comic Boom style */
+.feedback-alert {
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    display: none;
+    border: 3px solid var(--border-dark);
+    box-shadow: 4px 4px 0 var(--border-dark);
+    animation: slideIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.feedback-success { background: var(--accent-green); color: var(--border-dark); }
+.feedback-danger { background: var(--accent-red); color: white; }
+.feedback-info { background: var(--accent-cyan); color: var(--border-dark); }
+.feedback-warning { background: var(--accent-yellow); color: var(--border-dark); }
+
+/* Proof Table - Typewriter Document */
+.table-container {
+    overflow-x: auto;
+    background: var(--bg-paper);
+    border: 3px solid var(--border-dark);
+    padding: 0.5rem;
+}
+
+.proof-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    color: var(--text-dark);
+}
+
+.proof-table th, .proof-table td {
+    padding: 0.8rem;
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+}
+
+.proof-table th {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1rem;
+    border-bottom: 3px solid var(--border-dark);
+    background: rgba(0,0,0,0.05);
+}
+
+.proof-row {
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    transition: all 0.1s;
+}
+
+.proof-row:hover {
+    background: rgba(0,0,0,0.05);
+}
+
+.proof-row.selected {
+    background: rgba(52, 172, 224, 0.2) !important;
+    outline: 3px solid var(--accent-cyan);
+    outline-offset: -3px;
+}
+
+.rule-pill {
+    background: var(--border-dark);
+    color: white;
+    padding: 0.3rem 0.6rem;
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.premise-row .rule-pill { background: #576574; }
+.derived-row .rule-pill { background: var(--accent-green); color: var(--border-dark); }
+
+/* Rules Grid - Playing Cards */
+.rules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.rule-card {
+    background: var(--bg-card);
+    border: 3px solid var(--border-dark);
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    text-align: center;
+    box-shadow: 4px 4px 0 var(--border-dark);
+    position: relative;
+    overflow: hidden;
+}
+
+.rule-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.03) 10px, rgba(255,255,255,0.03) 20px);
+}
+
+.rule-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--accent-yellow);
+}
+
+.rule-card.active-rule {
+    background: var(--accent-yellow);
+    border-color: var(--border-dark);
+    color: var(--border-dark);
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--border-dark);
+}
+
+.rule-card.active-rule .rule-title, 
+.rule-card.active-rule .rule-symbol {
+    color: var(--border-dark);
+}
+
+.rule-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--accent-cyan);
+    margin-bottom: 0.5rem;
+}
+
+.rule-symbol {
+    font-family: monospace;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    background: rgba(0,0,0,0.5);
+    padding: 0.3rem;
+    border-radius: 4px;
+}
+
+/* Action Controls Bar */
+.actions-bar {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+/* Modals - Classified Files */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-card {
+    background: var(--bg-paper);
+    color: var(--text-dark);
+    border: 4px solid var(--border-dark);
+    width: 90%;
+    max-width: 700px;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 2.5rem;
+    box-shadow: 12px 12px 0 var(--border-dark);
+    position: relative;
+}
+
+/* "CLASSIFIED" stamp effect */
+.modal-card::before {
+    content: 'CLASSIFIED';
+    position: absolute;
+    top: 20px; right: 20px;
+    color: rgba(255, 0, 0, 0.15);
+    font-size: 4rem;
+    font-family: var(--font-heading);
+    font-weight: bold;
+    transform: rotate(15deg);
+    pointer-events: none;
+    border: 5px solid rgba(255,0,0,0.15);
+    padding: 0.5rem;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 3px solid var(--border-dark);
+    padding-bottom: 1rem;
+}
+
+.modal-header h2 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+}
+
+.rulebook-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.rulebook-card {
+    background: white;
+    border: 2px solid var(--border-dark);
+    padding: 1.5rem;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+}
+
+.rulebook-symbol {
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+    background: var(--bg-main);
+    color: white;
+    font-weight: bold;
+    display: inline-block;
+    border: 2px solid var(--border-dark);
+}
+
+/* Victory Animation */
+.victory-icon {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes pop {
+    0% { transform: scale(0); }
+    80% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

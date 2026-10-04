@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logic Detective: Proofs & Rules of Inference</title>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Header Navbar -->
+    <header class="navbar">
+        <div class="brand">
+            <span class="brand-logo">🕵️‍♂️</span>
+            <div class="brand-text">
+                <h1 class="brand-title">Logic Detective</h1>
+                <small class="text-muted">Discrete Mathematical Structures • Rules of Inference Proof Engine</small>
+            </div>
+        </div>
+        <div class="nav-controls">
+            <select id="caseSelect" class="select-input"></select>
+            <button id="rulebookBtn" class="btn">📖 Rulebook</button>
+            <button id="soundToggleBtn" class="btn">🔊 Sound: ON</button>
+        </div>
+    </header>
+
+    <!-- Main App Container -->
+    <main class="app-container">
+
+        <!-- Sidebar: Case Briefing & Suspects -->
+        <aside class="sidebar">
+            <section class="panel-card">
+                <div class="panel-title">
+                    <span id="caseTitle">Case Title</span>
+                    <span id="caseBadge" class="badge">Badge</span>
+                </div>
+                <p id="caseStory" class="story-text">Case briefing text goes here...</p>
+            </section>
+
+            <section class="panel-card">
+                <h3 class="panel-title">🕵️ Suspects & Persons of Interest</h3>
+                <div id="suspectsList" class="suspects-grid"></div>
+            </section>
+
+            <section class="panel-card">
+                <h3 class="panel-title">🔑 Logical Variables Dictionary</h3>
+                <div id="variableDict" class="variables-list"></div>
+            </section>
+
+            <section class="panel-card">
+                <h3 class="panel-title">🎯 Case Mission</h3>
+                <p id="goalDescription" class="story-text">Goal description...</p>
+                <div style="margin-top: 0.75rem;">
+                    <span id="goalBadge" class="badge" style="background: rgba(241, 224, 90, 0.15); color: var(--accent-gold); border-color: var(--accent-gold);">
+                        Target Goal
+                    </span>
+                </div>
+            </section>
+        </aside>
+
+        <!-- Main Workspace: Proof Table & Rules Bar -->
+        <section class="workspace">
+
+            <!-- Feedback Alert -->
+            <div id="feedbackBox" class="feedback-alert"></div>
+
+            <!-- Proof Steps Table -->
+            <div class="panel-card">
+                <div class="panel-title">
+                    <span>📜 Formal Step-by-Step Proof Workspace</span>
+                    <small class="text-muted">Click 1 or 2 lines below, choose a Rule, then click Derive</small>
+                </div>
+                <div class="table-container">
+                    <table class="proof-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 40px;">Select</th>
+                                <th style="width: 70px;">Line #</th>
+                                <th>Logical Statement / Formula</th>
+                                <th>Rule Applied</th>
+                                <th>Line Refs</th>
+                            </tr>
+                        </thead>
+                        <tbody id="proofTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Rules of Inference Grid -->
+            <div class="panel-card">
+                <h3 class="panel-title">⚡ Select Rule of Inference</h3>
+                <div id="rulesGrid" class="rules-grid"></div>
+            </div>
+
+            <!-- Action Controls Bar -->
+            <div class="actions-bar">
+                <button id="resetBtn" class="btn">🔄 Restart Case</button>
+                <button id="undoBtn" class="btn" disabled>↩️ Undo Step</button>
+                <button id="hintBtn" class="btn">💡 Get Hint</button>
+                <button id="deriveBtn" class="btn btn-primary" disabled>✨ Apply Rule & Derive</button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Rulebook Modal -->
+    <div id="rulebookModal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>📖 Rules of Inference Handbook</h2>
+                <button id="closeRulebookBtn" class="btn">✕ Close</button>
+            </div>
+            <div id="rulebookContent" class="rulebook-grid"></div>
+        </div>
+    </div>
+
+    <!-- Victory Modal -->
+    <div id="victoryModal" class="modal-overlay">
+        <div class="modal-card" style="text-align: center;">
+            <div class="victory-icon">🎉 🕵️‍♂️</div>
+            <h2 id="victoryCaseTitle">Case Closed!</h2>
+            <p id="victoryBadge" class="badge" style="margin: 0.5rem 0; font-size: 0.9rem;"></p>
+            <p id="victoryStepCount" style="margin-bottom: 1.25rem; font-size: 1.1rem; color: var(--accent-green);"></p>
+            <div id="victoryProofSummary" style="text-align: left; background: rgba(0,0,0,0.4); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;"></div>
+            <button id="closeVictoryBtn" class="btn btn-primary">Next Case ➔</button>
+        </div>
+    </div>
+
+    <!-- Custom Proof Sandbox Modal -->
+    <div id="sandboxModal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>🧪 Custom Proof Sandbox Setup</h2>
+                <button id="closeSandboxBtn" class="btn">✕ Cancel</button>
+            </div>
+            <p class="story-text" style="margin-bottom: 1rem;">Enter your custom premises (one per line) and target conclusion:</p>
+            
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; font-weight: 600; margin-bottom: 0.4rem;">Initial Premises (e.g. P -> Q):</label>
+                <textarea id="sandboxPremisesInput" class="select-input" style="width: 100%; height: 100px; font-family: monospace;" placeholder="P -> Q&#10;¬Q&#10;P | R"></textarea>
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+                <label style="display: block; font-weight: 600; margin-bottom: 0.4rem;">Target Goal / Conclusion (e.g. R):</label>
+                <input id="sandboxGoalInput" type="text" class="select-input" style="width: 100%; font-family: monospace;" placeholder="R">
+            </div>
+
+            <button id="startSandboxBtn" class="btn btn-primary" style="width: 100%;">Launch Custom Sandbox 🚀</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/logicEngine.js"></script>
+    <script src="js/casesData.js"></script>
+    <script src="js/soundEffects.js"></script>
+    <script src="js/uiController.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
